@@ -18,9 +18,14 @@ namespace IntelliHome.WS.Controllers
         this.capabilityRepository = new CapabilityRepository();
       }
 
-      public Capability[] Get()
+      [Route("Capabilities/{userId}")]
+      public Capability[] Get(int userId)
       {
-        return this.capabilityRepository.GetAll();
+        if (userId == 1)
+          return this.capabilityRepository.GetUser1();
+        if (userId == 2)
+          return this.capabilityRepository.GetUser2();
+        return new Capability[]{};
       }
     }
 }
