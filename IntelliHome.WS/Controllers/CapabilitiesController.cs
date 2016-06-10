@@ -11,21 +11,25 @@ namespace IntelliHome.WS.Controllers
 {
     public class CapabilitiesController : ApiController
     {
-      private CapabilityRepository capabilityRepository;
+      private UserRepository userRepository;
 
       public CapabilitiesController()
       {
-        this.capabilityRepository = new CapabilityRepository();
+        this.userRepository = new UserRepository();
       }
 
-      [Route("Capabilities/{userId}")]
-      public Capability[] Get(int userId)
+    [Route("Capabilities/{userId}")]
+    public Capability[] Get(int userId)
+    {
+      var user = this.userRepository.GetUser(userId);
+      if (user != null)
       {
-        if (userId == 1)
-          return this.capabilityRepository.GetUser1();
-        if (userId == 2)
-          return this.capabilityRepository.GetUser2();
-        return new Capability[]{};
+        return user.capabilities.ToArray();
+      }
+      else
+      {
+        return new Capability[] { };
+      }
       }
     }
 }

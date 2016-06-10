@@ -9,7 +9,7 @@ namespace IntelliHome.WS.Services
   public class CapabilityRepository
   {
 
-    private Capability[] capabilities = return new Capability[]{
+    public Capability[] capabilities = new Capability[]{
           new Capability()
           {
              DeviceId = 0,
@@ -231,14 +231,14 @@ namespace IntelliHome.WS.Services
                ValueType = "switch"
              },
              Value = 0
-          }
+          },
           new Capability()
           {
              DeviceId = 23,
              Description = "Description",
              Type = new ScalarDeviceType()
              {
-               ValueType = "medicion",               
+               ValueType = "medicion",
                Unit = "kg"
              },
              Value = 0.5
@@ -249,7 +249,7 @@ namespace IntelliHome.WS.Services
              Description = "Description",
              Type = new ScalarDeviceType()
              {
-               ValueType = "medicion",               
+               ValueType = "medicion",
                Unit = "hPa"
              },
              Value = 1040
@@ -260,21 +260,27 @@ namespace IntelliHome.WS.Services
              Description = "Description",
              Type = new ScalarDeviceType()
              {
-               ValueType = "medicion",               
+               ValueType = "medicion",
                Unit = "watts"
              },
              Value = 1700
           },
         };
 
-    public Capability[] GetUser1()
+    //public Capability[] GetUser1()
+    //{
+    //  return null;
+    //}
+    //public Capability[] GetUser2()
+    //{
+    //  return new Capability[]{
+    //  };
+    //}
+
+    public Capability[] findById(List<long> queryIds)
     {
-        
+      return capabilities.Where(cap => queryIds.Contains(cap.DeviceId)).ToArray();
     }
-    public Capability[] GetUser2()
-    {
-      return new Capability[]{
-      };
-    }
+
   }
 }
